@@ -1,41 +1,50 @@
 from random import randint
-answer = randint(1,100)
+
 
 print("Welcome to the Guessing Game! \nThe Rules are simple:"
      + "\n\t 1) Try to guess the number that has been randomly"
      + " selected \n\t 2) That's it! Have fun!")
 
-listOfGuesses = [0]
-numOfGuesses = 0
 
-print("I'm thinking of a number...")
-correct = False
-while not(correct):
-    choice =  input("What is your guess? ")
-    numChoice = int(choice)
-    if answer == numChoice:
-        correct = True
-    else:
-        dif = abs(numChoice - answer)
-        if numChoice < 1 or numChoice > 100:
-            print("OUT OF BOUNDS")
-            continue
-        if numOfGuesses == 0:
-            if dif <= 10:
-                print("WARM! Try again!")
-            elif dif > 10:
-                print("COLD! Try again!")
-        else:
-            if dif <= abs(answer - int(listOfGuesses[numOfGuesses])):
-                print("WARMER!")
-            else:
-                print("COLDER!")
-        listOfGuesses.append(choice)
-        numOfGuesses += 1
+endGameChar = 'y'
 
-if correct:
-    print("Congrats! The number was " + choice + "! \n You guessed "
-        + str(numOfGuesses) + " times!")
-else:
-    print("Ya code fucked up!")
+while endGameChar == 'y':
+	listOfGuesses = [0]
+	numOfGuesses = 0
+
+	print("I'm thinking of a number...")
+	answer = randint(1,100)
+	correct = False
+	while not(correct):
+		choice = input("What is your guess? ")
+		numChoice = int(choice)
+		if answer == numChoice:
+			correct = True
+		else:
+			dif = abs(numChoice - answer)
+			if numChoice < 1 or numChoice > 100:
+				print("OUT OF BOUNDS")
+				continue
+			if numOfGuesses == 0:
+				if dif <= 10:
+					print("WARM! Try again!")
+				else:
+					print("COLD! Try again!")
+			else:
+				if dif <= abs(answer - int(listOfGuesses[numOfGuesses])):
+					print("WARMER!")
+				else:
+					print("COLDER!")
+			listOfGuesses.append(choice)
+			numOfGuesses += 1
+
+	if correct:
+		print("Congrats! The number was " + choice + "! \n You guessed "
+			+ str(numOfGuesses) + " times!")
+		print("Here were your guesses: ")
+		print(listOfGuesses) 
+	else:
+		print("Ya code fucked up!")
+	endGameChar = input("Wanna play again? Type Y to play again: ")
+
         
